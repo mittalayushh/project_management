@@ -4,7 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff, Check } from 'lucide-react';
 
+import { useRouter } from 'next/navigation';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+
+
+
 export default function SignUp() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -56,11 +63,18 @@ export default function SignUp() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Handle signup logic here
-      console.log('Signup attempt:', formData);
+    if (!validateForm()) return;
+
+    try {
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      router.push('/dashboard');
+    } catch (err) {
+      console.error(err.message);
+      if (err.code === "auth/email-already-in-use") {
+        router.push('/login');
+      }
     }
   };
 
