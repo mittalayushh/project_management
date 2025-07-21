@@ -70,7 +70,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
             <div className="space-y-2 text-gray-300">
               <p className="font-medium text-white">Nakama</p>
-              <p>Email: info@nakama.com</p>
+              <p><a href='mailto:info@nakama.com'>info@nakama.com</a></p>
               <p>Phone: 987654321</p>
             </div>
           </div>

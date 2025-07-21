@@ -28,7 +28,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      router.push('/about')
+      router.push('/dashboard')
     } catch (err) {
       alert(err.message)
     }

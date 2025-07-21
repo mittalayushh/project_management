@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -71,6 +73,9 @@ export default function Contact() {
   };
 
   return (
+    <>
+    
+    <Navbar/>
     <div className="min-h-screen bg-gray-50 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12">
@@ -96,7 +101,9 @@ export default function Contact() {
                 
                 <div className="flex items-center">
                   <Mail className="w-6 h-6 text-blue-600 mr-3" />
-                  <span className="text-gray-700">info@nakama.com</span>
+                  <span className="text-gray-700">
+                    <a href='mailto:info@nakama.com'>info@nakama.com</a>
+                  </span>
                 </div>
                 
                 <div className="flex items-center">
@@ -225,5 +232,6 @@ export default function Contact() {
         </div>
       </div>
     </div>
+    </>
   );
 }

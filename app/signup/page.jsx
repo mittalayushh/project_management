@@ -69,7 +69,8 @@ export default function SignUp() {
 
     try {
       await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      router.push('/dashboard');
+      router.push('/login');
+      
     } catch (err) {
       console.error(err.message);
       if (err.code === "auth/email-already-in-use") {

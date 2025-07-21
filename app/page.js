@@ -1,62 +1,14 @@
 import Link from 'next/link';
-import { CheckCircle, Users, BarChart3, Calendar, MessageSquare, Shield } from 'lucide-react';
-
+import { features } from './data/Features';
+import { testimonials } from './data/Testimonials';
+import Navbar from '@/components/Navbar';
 export default function Home() {
-  const features = [
-    {
-      icon: <CheckCircle className="w-8 h-8 text-blue-600" />,
-      title: 'Task Management',
-      description: 'Create, assign, and track tasks with ease. Set deadlines, priorities, and dependencies.',
-    },
-    {
-      icon: <Users className="w-8 h-8 text-blue-600" />,
-      title: 'Team Collaboration',
-      description: 'Work together seamlessly with real-time updates, comments, and file sharing.',
-    },
-    {
-      icon: <BarChart3 className="w-8 h-8 text-blue-600" />,
-      title: 'Progress Tracking',
-      description: 'Monitor project progress with visual dashboards and detailed reports.',
-    },
-    {
-      icon: <Calendar className="w-8 h-8 text-blue-600" />,
-      title: 'Timeline View',
-      description: 'Visualize project timelines and dependencies with Gantt charts.',
-    },
-    {
-      icon: <MessageSquare className="w-8 h-8 text-blue-600" />,
-      title: 'Communication',
-      description: 'Keep all project communication centralized and organized.',
-    },
-    {
-      icon: <Shield className="w-8 h-8 text-blue-600" />,
-      title: 'Security',
-      description: 'Enterprise-grade security to keep your data safe and compliant.',
-    },
-  ];
 
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      role: 'Project Manager at TechCorp',
-      content: 'Nakama has revolutionized how our team manages projects. The intuitive interface and powerful features have increased our productivity by 40%.',
-      avatar: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=2',
-    },
-    {
-      name: 'Michael Chen',
-      role: 'CEO at StartupXYZ',
-      content: 'As a fast-growing startup, we needed a project management solution that could scale with us. Nakama delivers exactly that.',
-      avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=2',
-    },
-    {
-      name: 'Emily Rodriguez',
-      role: 'Team Lead at Creative Agency',
-      content: 'The collaboration features in Nakama have transformed how our remote team works together. Everything is organized and accessible.',
-      avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=2',
-    },
-  ];
 
   return (
+    <>
+    <Navbar/>
+    
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
@@ -157,5 +109,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }

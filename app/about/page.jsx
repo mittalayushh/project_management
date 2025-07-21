@@ -33,6 +33,7 @@ export default function About() {
   ];
 
   return (
+    <>
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
@@ -142,5 +143,6 @@ export default function About() {
         </div>
       </section>
     </div>
+    </>
   );
 }
