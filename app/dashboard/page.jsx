@@ -55,9 +55,8 @@ export default function Dashboard({ user }) {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl text-gray-400 mb-2">{formatDate(currentTime)}</h1>
-          <h2 className="text-4xl font-bold text-white mb-8">
-            {/* The greeting now uses the dynamic user name from Firebase! */}
+          <h1 className="text-2xl text-gray-600 mb-2">{formatDate(currentTime)}</h1>
+          <h2 className="text-4xl font-bold text-gray-900 mb-8">
             {getGreeting()}, {userName}!
           </h2>
         </div>
@@ -65,67 +64,67 @@ export default function Dashboard({ user }) {
         {/* Circular Stats */}
         <div className="flex justify-center space-x-12 mb-12">
           <div className="text-center">
-            <div className="w-32 h-32 rounded-full border-8 border-orange-500 flex items-center justify-center mb-4">
+            <div className="w-32 h-32 rounded-full border-8 border-orange-400 bg-white flex items-center justify-center mb-4 shadow">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white">{tasksPending}</div>
-                <div className="text-sm text-gray-400">Tasks</div>
+                <div className="text-3xl font-bold text-gray-900">{tasksPending}</div>
+                <div className="text-sm text-gray-600">Tasks</div>
               </div>
             </div>
-            <p className="text-gray-300">Tasks Pending</p>
+            <p className="text-gray-600">Tasks Pending</p>
           </div>
 
           <div className="text-center">
-            <div className="w-32 h-32 rounded-full border-8 border-blue-500 flex items-center justify-center mb-4">
+            <div className="w-32 h-32 rounded-full border-8 border-blue-400 bg-white flex items-center justify-center mb-4 shadow">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white">{totalProjects}</div>
-                <div className="text-sm text-gray-400">Projects</div>
+                <div className="text-3xl font-bold text-gray-900">{totalProjects}</div>
+                <div className="text-sm text-gray-600">Projects</div>
               </div>
             </div>
-            <p className="text-gray-300">Active Projects</p>
+            <p className="text-gray-600">Active Projects</p>
           </div>
         </div>
 
         {/* Cards Section */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Tasks Due Today */}
-          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-            <h3 className="text-xl font-semibold text-white mb-4">Tasks Due Today</h3>
+          <div className="bg-white rounded-lg p-6 border border-gray-200 shadow">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">Tasks Due Today</h3>
             <div className="space-y-3">
               {tasksToday.map((task, index) => (
-                <div key={index} className="bg-gray-700 rounded-lg p-4">
+                <div key={index} className="bg-gray-50 rounded-lg p-4">
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="text-white font-medium">{task.name}</h4>
+                    <h4 className="text-gray-900 font-medium">{task.name}</h4>
                     <span
                       className={`px-2 py-1 rounded text-xs ${
                         task.priority === 'High'
-                          ? 'bg-red-600 text-white'
+                          ? 'bg-red-100 text-red-700'
                           : task.priority === 'Medium'
-                          ? 'bg-yellow-600 text-white'
-                          : 'bg-green-600 text-white'
+                          ? 'bg-yellow-100 text-yellow-700'
+                          : 'bg-green-100 text-green-700'
                       }`}
                     >
                       {task.priority}
                     </span>
                   </div>
-                  <p className="text-gray-400 text-sm">{task.project}</p>
+                  <p className="text-gray-600 text-sm">{task.project}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Progress Per Project */}
-          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
-            <h3 className="text-xl font-semibold text-white mb-4">Progress Per Project</h3>
+          <div className="bg-white rounded-lg p-6 border border-gray-200 shadow">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">Progress Per Project</h3>
             <div className="space-y-4">
               {projectProgress.map((project, index) => (
                 <div key={index}>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-white">{project.name}</span>
-                    <span className="text-gray-400">{project.progress}%</span>
+                    <span className="text-gray-900">{project.name}</span>
+                    <span className="text-gray-600">{project.progress}%</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div className="w-full bg-gray-100 rounded-full h-2">
                     <div
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                      className="bg-blue-500 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${project.progress}%` }}
                     ></div>
                   </div>

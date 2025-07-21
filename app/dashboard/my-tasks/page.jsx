@@ -1,0 +1,13 @@
+'use client';
+
+import DashboardLayout from '@/components/DashboardLayout';
+import { Plus, Filter, ArrowUpDown, ChevronDown } from 'lucide-react';
+import TaskList from '@/components/TaskList';
+
+export default function MyTasks() {
+  return (
+    <DashboardLayout>
+      <TaskList />
+    </DashboardLayout>
+  );
+}
