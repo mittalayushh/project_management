@@ -10,16 +10,30 @@ export default function Sidebar({ isOpen }) {
   const router = useRouter();
   const [projectsExpanded, setProjectsExpanded] = useState(true);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = sessionStorage.getItem('projects');
+      return stored ? JSON.parse(stored) : [];
+    }
+    return [];
+  });
 
-  // Add project if navigated to /dashboard/project/[slug]
+  // Add project if navigated to /dashboard/[slug]
   useEffect(() => {
-    if (pathname && pathname.startsWith('/dashboard/project/')) {
-      const slug = pathname.split('/dashboard/project/')[1];
-      if (slug && !projects.some(p => p.slug === slug)) {
-        // Use slug as name (capitalize first letter for display)
+    if (pathname && pathname.startsWith('/dashboard/')) {
+      const slug = pathname.split('/dashboard/')[1];
+      if (
+        slug &&
+        !slug.includes('/') &&
+        slug !== 'my-tasks' &&
+        slug !== 'dashboard' &&
+        slug !== 'new-project' &&
+        !projects.some(p => p.slug === slug)
+      ) {
         const name = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        setProjects(prev => [...prev, { name, slug }]);
+        const newProjects = [...projects, { name, slug }];
+        setProjects(newProjects);
+        sessionStorage.setItem('projects', JSON.stringify(newProjects));
       }
     }
   }, [pathname, projects]);
@@ -74,7 +88,7 @@ export default function Sidebar({ isOpen }) {
                 {displayedProjects.map((project, index) => (
                   <Link
                     key={index}
-                    href={`/dashboard/project/${project.slug}`}
+                    href={`/dashboard/${project.slug}`}
                     className="block px-6 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-gray-100 rounded transition-colors"
                   >
                     {project.name}

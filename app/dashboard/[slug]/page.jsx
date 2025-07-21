@@ -19,7 +19,6 @@ export default function ProjectPage() {
       <div className="max-w-6xl mx-auto">
         {/* Project Header */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-white mb-4">{projectName}</h1>
           
           {/* Sticky Navigation */}
           <div className="bg-gray-800 rounded-lg border border-gray-700 p-1 inline-flex">
