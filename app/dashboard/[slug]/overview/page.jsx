@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
 import { Calendar, Trash2 } from 'lucide-react';
+import { useProjects } from '@/components/ProjectContext';
 
 export default function ProjectOverview() {
   const params = useParams();
+  const { deleteProject } = useProjects();
   const projectName = params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   
   const [projectDescription, setProjectDescription] = useState('This is a sample project description that can be edited.');
@@ -23,15 +25,7 @@ export default function ProjectOverview() {
   ];
 
   const handleDeleteProject = () => {
-    // Remove project from sessionStorage
-    if (typeof window !== 'undefined') {
-      const stored = sessionStorage.getItem('projects');
-      if (stored) {
-        const projects = JSON.parse(stored);
-        const filtered = projects.filter(p => p.slug !== params.slug);
-        sessionStorage.setItem('projects', JSON.stringify(filtered));
-      }
-    }
+    deleteProject(params.slug);
     window.location.href = '/dashboard';
   };
 

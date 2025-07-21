@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
+import { useProjects } from './ProjectContext';
 
-export default function TaskList() {
-  const [tasks, setTasks] = useState([]);
+export default function TaskList({ projectName, projectSlug }) {
+  const {
+    myTasks, addMyTask, updateMyTask, deleteMyTask,
+    projects, addTaskToProject, updateTaskInProject, deleteTaskFromProject
+  } = useProjects();
   const [sortOrder, setSortOrder] = useState('normal');
 
-  const addTask = () => {
+  // Determine if this is a project task list or 'My Tasks'
+  let tasks = myTasks;
+  let addTask = () => {
     const newTask = {
       id: Date.now(),
       name: '',
@@ -15,18 +21,31 @@ export default function TaskList() {
       status: 'On track',
       completed: false,
     };
-    setTasks([...tasks, newTask]);
+    addMyTask(newTask);
   };
+  let updateTask = (id, field, value) => updateMyTask(id, { [field]: value });
+  let deleteTask = (id) => deleteMyTask(id);
+  let title = 'My Tasks';
 
-  const updateTask = (id, field, value) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, [field]: value } : task
-    ));
-  };
-
-  const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id));
-  };
+  if (projectSlug) {
+    const project = projects.find(p => p.slug === projectSlug);
+    tasks = project && Array.isArray(project.tasks) ? project.tasks : [];
+    addTask = () => {
+      const newTask = {
+        id: Date.now(),
+        name: '',
+        description: '',
+        dueDate: '',
+        priority: 'Medium',
+        status: 'On track',
+        completed: false,
+      };
+      addTaskToProject(projectSlug, newTask);
+    };
+    updateTask = (id, field, value) => updateTaskInProject(projectSlug, id, { [field]: value });
+    deleteTask = (id) => deleteTaskFromProject(projectSlug, id);
+    title = projectName ? `${projectName} - Tasks` : 'Project Tasks';
+  }
 
   const priorityValue = (priority) => {
     if (priority === 'High') return 3;
@@ -46,7 +65,7 @@ export default function TaskList() {
     <div className="max-w-6xl mx-auto">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
+        <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
         <div className="flex gap-2 items-center">
           <select
             value={sortOrder}

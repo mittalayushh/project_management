@@ -9,7 +9,7 @@ export default function ProjectTaskList() {
   const projectName = params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   return (
     <div className="max-w-6xl mx-auto">
-      <TaskList projectName={projectName} />
+      <TaskList projectName={projectName} projectSlug={params.slug} />
     </div>
   );
 }

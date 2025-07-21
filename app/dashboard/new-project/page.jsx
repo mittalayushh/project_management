@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
+import { useProjects } from '@/components/ProjectContext';
 
 export default function NewProjectPage() {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [created, setCreated] = useState(false);
   const router = useRouter();
+  const { addProject } = useProjects();
 
   const handleCreate = (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ export default function NewProjectPage() {
       return;
     }
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-');
+    addProject(name.trim(), slug);
     setCreated(true);
     setTimeout(() => {
       router.push(`/dashboard/${slug}`);

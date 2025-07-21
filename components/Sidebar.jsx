@@ -1,42 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { Home, CheckSquare, FolderPlus, Plus, ChevronDown, ChevronRight } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { Home, CheckSquare, Plus, ChevronDown, ChevronRight } from 'lucide-react';
+import { useProjects } from './ProjectContext';
 
 export default function Sidebar({ isOpen }) {
   const pathname = usePathname();
-  const router = useRouter();
   const [projectsExpanded, setProjectsExpanded] = useState(true);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const [projects, setProjects] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const stored = sessionStorage.getItem('projects');
-      return stored ? JSON.parse(stored) : [];
-    }
-    return [];
-  });
-
-  // Add project if navigated to /dashboard/[slug]
-  useEffect(() => {
-    if (pathname && pathname.startsWith('/dashboard/')) {
-      const slug = pathname.split('/dashboard/')[1];
-      if (
-        slug &&
-        !slug.includes('/') &&
-        slug !== 'my-tasks' &&
-        slug !== 'dashboard' &&
-        slug !== 'new-project' &&
-        !projects.some(p => p.slug === slug)
-      ) {
-        const name = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        const newProjects = [...projects, { name, slug }];
-        setProjects(newProjects);
-        sessionStorage.setItem('projects', JSON.stringify(newProjects));
-      }
-    }
-  }, [pathname, projects]);
+  const { projects } = useProjects();
 
   const displayedProjects = showAllProjects ? projects : projects.slice(0, 5);
 

@@ -19,32 +19,30 @@ export default function ProjectPage() {
       <div className="max-w-6xl mx-auto">
         {/* Project Header */}
         <div className="mb-6">
-          
-          {/* Sticky Navigation */}
-          <div className="bg-gray-800 rounded-lg border border-gray-700 p-1 inline-flex">
+          {/* Modern Toggle */}
+          <div className="bg-white rounded-lg border border-blue-200 p-1 inline-flex shadow-sm">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`px-6 py-2 rounded-md transition-colors ${
+              className={`px-6 py-2 rounded-md transition-colors font-medium focus:outline-none ${
                 activeTab === 'overview'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                  ? 'bg-blue-600 text-white shadow'
+                  : 'text-blue-700 hover:bg-blue-50'
               }`}
             >
               Overview
             </button>
             <button
               onClick={() => setActiveTab('list')}
-              className={`px-6 py-2 rounded-md transition-colors ${
+              className={`px-6 py-2 rounded-md transition-colors font-medium focus:outline-none ${
                 activeTab === 'list'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                  ? 'bg-blue-600 text-white shadow'
+                  : 'text-blue-700 hover:bg-blue-50'
               }`}
             >
               List
             </button>
           </div>
         </div>
-
         {/* Tab Content */}
         {activeTab === 'overview' && <Overview />}
         {activeTab === 'list' && <List />}
