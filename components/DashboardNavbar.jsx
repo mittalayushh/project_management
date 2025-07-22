@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Menu, X, User, LogOut, Home, Mail, DollarSign } from 'lucide-react';
+import {  Menu, X, User, LogOut, Home, Mail, DollarSign } from 'lucide-react';
 import Link from 'next/link';
 import { getAuth, signOut } from 'firebase/auth';
 
@@ -14,7 +14,7 @@ export default function DashboardNavbar({ sidebarOpen, setSidebarOpen, user }) {
     window.location.href = '/';
   };
 
-  const displayName = user?.displayName || user?.email || 'User';
+  const displayName = user?.displayName || user?.email;
   const email = user?.email || '';
 
   return (

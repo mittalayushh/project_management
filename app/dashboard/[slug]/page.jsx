@@ -2,15 +2,11 @@
 
 import { useState } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
-import { useParams } from 'next/navigation';
 
-// Standard, static imports instead of dynamic ones
 import Overview from './overview/page';
 import List from './list/page';
 
 export default function ProjectPage() {
-  const params = useParams();
-  const projectName = params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   
   const [activeTab, setActiveTab] = useState('overview');
 

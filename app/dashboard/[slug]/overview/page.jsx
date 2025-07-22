@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
-import DashboardLayout from '@/components/DashboardLayout';
 import { Calendar, Trash2 } from 'lucide-react';
 import { useProjects } from '@/components/ProjectContext';
+import { useRouter } from 'next/navigation';
 
 export default function ProjectOverview() {
   const params = useParams();
+  const router = useRouter();
   const { deleteProject } = useProjects();
   const projectName = params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   
@@ -18,15 +19,10 @@ export default function ProjectOverview() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const tasksToday = [
-    { name: 'Review design mockups', priority: 'High' },
-    { name: 'Update project timeline', priority: 'Medium' },
-    { name: 'Team sync meeting', priority: 'Low' },
-  ];
 
   const handleDeleteProject = () => {
     deleteProject(params.slug);
-    window.location.href = '/dashboard';
+    router.push('/dashboard');  
   };
 
   return (

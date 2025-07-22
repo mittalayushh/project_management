@@ -1,6 +1,5 @@
 'use client';
 
-import DashboardLayout from '@/components/DashboardLayout';
 import TaskList from '@/components/TaskList';
 import { useParams } from 'next/navigation';
 

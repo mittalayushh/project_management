@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import DashboardNavbar from './DashboardNavbar';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-// import { app } from '../lib/utils';
 import Sidebar from './Sidebar';
 
 export default function DashboardLayout({ children }) {
@@ -43,7 +42,6 @@ export default function DashboardLayout({ children }) {
         <main className="flex-1 p-6">
           {children && typeof children === 'function' ? children({ user }) :
             children && children.props ?
-              // If children is a React element, clone and inject user prop
               (Array.isArray(children)
                 ? children.map(child => child && child.props ? { ...child, props: { ...child.props, user } } : child)
                 : { ...children, props: { ...children.props, user } })
